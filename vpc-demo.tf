@@ -13,7 +13,7 @@ resource "aws_vpc" "javahome_vpc" {
 }
 # Create Subnet
 resource "aws_subnet" "subnets" {
-  count = "${length(var.subnets_cidr)}"
+  count = "${length(data.aws_availability_zones.available.names)}"
   map_public_ip_on_launch = true
   vpc_id     = "${aws_vpc.javahome_vpc.id}"
   cidr_block = "${element(var.subnets_cidr,count.index)}"
